@@ -18,6 +18,12 @@ public class LongestCommonPrefix {
 		}
 		return output;
 	}
+	
+	public String longestCommonPrefixUsingTries(String[] strs) {
+		// todo:: do using tries 
+		return null;
+	}
+
 
 	public static void main(String[] args) {
 		String[] input = new String[] { "flower", "flow", "flight" };
