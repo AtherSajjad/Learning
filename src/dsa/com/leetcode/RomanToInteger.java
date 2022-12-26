@@ -1,5 +1,7 @@
 package dsa.com.leetcode;
 
+import java.util.HashMap;
+
 /*
  * 
 Symbol       Value
@@ -39,6 +41,7 @@ public class RomanToInteger {
 	static final int CD = 400;
 	static final int CM = 900;
 
+	// Simple brute force
 	public int romanToInt(String s) {
 		int output = 0;
 
@@ -91,9 +94,36 @@ public class RomanToInteger {
 		return output;
 	}
 
+	// follow the numbers, if the next number is higher subtract the current value, since it will be in descending order
+	// this actually uses more memory and runtime than brute force solution
+	public int romanToIntUsingMapAndFollow(String s) {
+
+		int output = 0;
+		HashMap<Character, Integer> map = new HashMap<>();
+		map.put('I', 1);
+		map.put('V', 5);
+		map.put('X', 10);
+		map.put('L', 50);
+		map.put('C', 100);
+		map.put('D', 500);
+		map.put('M', 1000);
+
+		for (int i = 0; i < s.length(); i++) {
+			char ch = s.charAt(i);
+			// check bounds before checking the next value
+			if (i + 1 < s.length() && map.get(ch) < map.get(s.charAt(i + 1))) {
+				output -= map.get(ch);
+			} else {
+				output += map.get(ch);
+			}
+		}
+
+		return output;
+	}
+
 	public static void main(String[] args) {
-		String s = "CD";
+		String s = "MCMXCIV";
 		RomanToInteger obj = new RomanToInteger();
-		System.out.println("Roman " + s + " to integer = " + obj.romanToInt(s));
+		System.out.println("Roman " + s + " to integer = " + obj.romanToIntUsingMapAndFollow(s));
 	}
 }
