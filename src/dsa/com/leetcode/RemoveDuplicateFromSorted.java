@@ -9,22 +9,28 @@ public class RemoveDuplicateFromSorted {
 		System.out.println();
 	}
 
-	
-	public static void main(String[] args) {
-		int[] input = new int[] { 0,0,1,1,1,2,2,2,3,3,4 };
-
-		int k = input.length;
-		printArray(input, input.length);
-
-		int j= 0;
+	// use two pointers to compare next elements
+	public int removeDuplicates(int[] nums) {
+		int k = nums.length;
+		
+		int j = 0;
 		for (int i = 0; i < k - 1; i++) {
-			if (input[i] != input[i + 1]) {
-				input[j++]=input[i];
+			if (nums[i] != nums[i + 1]) {
+				nums[j++] = nums[i];
 			}
 		}
-		
-		input[j++]=input[k-1];
-		
+
+		nums[j++] = nums[k - 1];
+
+		return j;
+	}
+
+	public static void main(String[] args) {
+		int[] input = new int[] { 0, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
+
+		printArray(input, input.length);
+
+		int j = new RemoveDuplicateFromSorted().removeDuplicates(input);
 
 		printArray(input, j);
 	}
