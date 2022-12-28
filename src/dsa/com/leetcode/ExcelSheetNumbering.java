@@ -4,6 +4,7 @@ public class ExcelSheetNumbering {
 
 	public static void main(String[] args) {
 
+		// Tests mathematics
 		String number = "FXSHRXW";
 		int STANDARD_CHARACTERS = 26;
 
