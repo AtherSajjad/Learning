@@ -12,6 +12,7 @@ public class AddTwoNumbers {
 		System.out.println();
 	}
 
+	// orignal submitted
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		// expected output 7 0 8
 		int carry = 0;
@@ -73,6 +74,37 @@ public class AddTwoNumbers {
 
 	}
 
+	public ListNode addTwoNumbersOptimized(ListNode l1, ListNode l2) {
+		// expected output 7 0 8
+		int carry = 0;
+		ListNode head = new ListNode();
+		ListNode result = head;
+
+		while (l1 != null || l2 != null || carry == 1) {
+			int v1 = l1 != null ? l1.val : 0;
+			int v2 = l2 != null ? l2.val : 0;
+
+			int val = v1 + v2 + carry;
+			carry = val / 10; // to reinitialize
+			val = val % 10;
+
+			result.next = new ListNode(val);
+
+			if (l1 != null) {
+				l1 = l1.next;
+			}
+
+			if (l2 != null) {
+				l2 = l2.next;
+			}
+
+			result = result.next;
+		}
+
+		return head.next;
+
+	}
+
 	public static void main(String[] args) {
 //		ListNode firstNumber = new ListNode(2);
 //		firstNumber.next = new ListNode(4);
@@ -92,7 +124,7 @@ public class AddTwoNumbers {
 		firstNumber.next.next.next.next = new ListNode(9);
 		firstNumber.next.next.next.next.next = new ListNode(9);
 		firstNumber.next.next.next.next.next.next = new ListNode(9);
-		
+
 		ListNode secondNumber = new ListNode(9);
 		secondNumber.next = new ListNode(9);
 		secondNumber.next.next = new ListNode(9);
@@ -101,7 +133,9 @@ public class AddTwoNumbers {
 		printList(firstNumber);
 		printList(secondNumber);
 
-		ListNode result = new AddTwoNumbers().addTwoNumbers(firstNumber, secondNumber);
+		ListNode result = new AddTwoNumbers().addTwoNumbersOptimized(firstNumber, secondNumber); // 8 -> 9 -> 9 -> 9 ->
+																									// 0 -> 0 -> 0 -> 1
+																									// ->
 
 		printList(result);
 	}
